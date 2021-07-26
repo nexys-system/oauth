@@ -30,7 +30,7 @@
   "peerDependencies": {
     "@types/koa-router": "^7.4.4",
     "@types/node-fetch": "^2.5.12",
-    "koa-router": "^10.0.0",
+    "koa-router": "^7.4.0",
     "node-fetch": "^2.6.1"
   }
 }
