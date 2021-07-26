@@ -1,0 +1,25 @@
+{
+  "name": "@nexys/boilerplate_node_package",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "files": [
+    "dist/*","README.md"
+  ],
+  "author": "Nexys Sarl",
+  "license": "MIT",
+  "scripts":{
+    "build":"tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nexysweb/boilerplate-node-package"
+  },
+  "keywords":[],
+  "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "jest": "^26.0.1",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.9.3"
+  }
+}
