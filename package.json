@@ -1,25 +1,31 @@
 {
-  "name": "@nexys/boilerplate_node_package",
+  "name": "@nexys/oauth",
   "version": "0.0.0",
   "main": "dist/index.js",
   "files": [
-    "dist/*","README.md"
+    "dist/*",
+    "README.md"
   ],
   "author": "Nexys Sarl",
   "license": "MIT",
-  "scripts":{
-    "build":"tsc",
+  "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Nexysweb/boilerplate-node-package"
   },
-  "keywords":[],
+  "keywords": [],
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "jest": "^26.0.1",
     "ts-jest": "^25.3.1",
     "typescript": "^3.9.3"
+  },
+  "peerDependencies": {
+    "@types/node-fetch": "^2.5.12",
+    "koa-router": "^10.0.0",
+    "node-fetch": "^2.6.1"
   }
 }
