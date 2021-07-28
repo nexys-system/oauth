@@ -7,6 +7,5 @@ import Google from "./google";
 import Gitlab from "./gitlab";
 import Github from "./github";
 import * as Utils from "./utils";
-import Routes from "./routes";
 
-export { Abstract, Google, Github, Gitlab, Utils, Routes };
+export { Abstract, Google, Github, Gitlab, Utils };
