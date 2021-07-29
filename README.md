@@ -23,3 +23,5 @@ router.get("/sso/github/redirect", async (ctx) => {
 });
 
 ```
+
+[Link to old generic route generator](https://github.com/nexys-system/oauth/commit/1679c3799af8f4d53d4a4a23c21fed9dfcb0ab9a) (deleted from the repo, to reduce the amount of dependencies)
