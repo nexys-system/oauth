@@ -1,7 +1,7 @@
 import Z, { Profile } from "./zoho";
 import nock from "nock";
 
-const redirect_uri = "https://admin.lunch-lottery.com/sso/zoho/redirect";
+const redirect_uri = "https://myhost/sso/zoho/redirect";
 
 const z = new Z("clientId", "clientSecret", redirect_uri);
 
@@ -27,7 +27,7 @@ test("redirect url", () => {
   const url = z.oAuthUrl();
 
   expect(url).toEqual(
-    "https://accounts.zoho.com/oauth/v2/auth?response_type=code&scope=AaaServer.profile.Read&prompt=consent&client_id=clientId&redirect_uri=https%3A%2F%2Fadmin.lunch-lottery.com%2Fsso%2Fzoho%2Fredirect"
+    "https://accounts.zoho.com/oauth/v2/auth?response_type=code&scope=AaaServer.profile.Read&prompt=consent&client_id=clientId&redirect_uri=https%3A%2F%2Fmyhost%2Fsso%2Fzoho%2Fredirect"
   );
 });
 
