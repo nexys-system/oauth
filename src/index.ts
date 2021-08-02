@@ -6,6 +6,7 @@ import Abstract from "./abstract";
 import Google from "./google";
 import Gitlab from "./gitlab";
 import Github from "./github";
+import Zoho from "./zoho";
 import * as Utils from "./utils";
 
-export { Abstract, Google, Github, Gitlab, Utils };
+export { Abstract, Google, Github, Gitlab, Zoho, Utils };

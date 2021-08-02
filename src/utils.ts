@@ -49,8 +49,6 @@ export const callback = async (url: string, data: Object): Promise<string> => {
     method: "POST",
   };
 
-  console.log(options);
-
   try {
     const r = await fetch(url, options);
 
@@ -62,9 +60,9 @@ export const callback = async (url: string, data: Object): Promise<string> => {
     //console.log(await r.text());
     const response = await r.text();
 
-    console.log(r.headers.get("content-type"));
+    // console.log(r.headers.get("content-type"));
 
-    console.log(response);
+    // console.info(response);
 
     const a = response
       .split("&")
