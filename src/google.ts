@@ -87,7 +87,7 @@ export default class Google extends AbstractOAuth<Profile> {
       };
     } catch (err) {
       console.log("error refresh");
-      return err;
+      throw err;
     }
   };
 

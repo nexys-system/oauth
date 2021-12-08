@@ -7,8 +7,10 @@ export interface Profile {
   login: string;
 }
 
-const urlAuthorize: string = "https://github.com/login/oauth/authorize";
-const urlToken: string = "https://github.com/login/oauth/access_token";
+const host = "https://github.com/login/oauth";
+
+const urlAuthorize: string = host + "/authorize";
+const urlToken: string = host + "/access_token";
 
 export default class Github extends AbstractOAuth<Profile> {
   callback = async (code: string): Promise<string> => {

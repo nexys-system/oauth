@@ -1,11 +1,11 @@
-import fetch from "node-fetch";
 import * as Utils from "./utils";
 import AbstractOAuth from "./abstract";
 
 export type Profile = { id: string; login: string };
 
-const urlAuthorize: string = "https://gitlab.com/oauth/authorize";
-const urlToken: string = "https://gitlab.com/oauth/token";
+const host = "https://gitlab.com/oauth";
+const urlAuthorize: string = host + "/authorize";
+const urlToken: string = host + "/token";
 
 export default class Gitlab extends AbstractOAuth<Profile> {
   callback = async (code: string): Promise<string> => {
@@ -29,22 +29,7 @@ export default class Gitlab extends AbstractOAuth<Profile> {
     return Utils.oAuthLink(urlAuthorize, params);
   };
 
-  getProfile = async (token: string): Promise<Profile> => {
-    const headers = {
-      Authorization: "Bearer " + token,
-      "content-type": "application/json",
-    };
-
-    const url = "https://api.github.com/user";
-
-    const options = {
-      method: "GET",
-      headers,
-    };
-
-    const r = await fetch(url, options);
-    const { id, login } = await r.json();
-
-    return { id, login };
+  getProfile = async (_token: string): Promise<Profile> => {
+    return { id: "1", login: "todo" };
   };
 }
