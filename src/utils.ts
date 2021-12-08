@@ -1,9 +1,30 @@
 import fetch from "node-fetch";
 import * as FT from "node-fetch";
+import crypto from "crypto";
 
 export interface OAuthHeaders {
   Authorization: string;
 }
+const isUndefined = (a: any): a is undefined => a === undefined;
+
+const paramsToQueryString = (
+  params:
+    | Object
+    | {
+        [k: string]: string | boolean | number | undefined;
+      }
+): string => {
+  const arr = Object.entries(params);
+
+  if (arr.length === 0) {
+    return "";
+  }
+
+  return arr
+    .filter(([_k, v]) => !isUndefined(v))
+    .map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`)
+    .join("&");
+};
 
 // turn into Class
 
@@ -15,34 +36,16 @@ export interface OAuthHeaders {
 export const getUriRedirect = (
   url: string,
   extra: { [k: string]: string }
-): string => {
-  const extraArray = Object.entries(extra);
-
-  if (extraArray.length === 0) {
-    return url;
-  }
-
-  return (
-    url + "?" + extraArray.map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
-  );
-};
+): string => url + "?" + paramsToQueryString(extra);
 
 export const oAuthLink = (
   host: string,
-  params: { [k: string]: string | boolean | number }
-): string => {
-  const p: string = Object.entries(params)
-    .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
-    .join("&");
-
-  return host + "?" + p;
-};
+  params: { [k: string]: string | boolean | number | undefined }
+): string => host + "?" + paramsToQueryString(params);
 
 export const callback = async (url: string, data: Object): Promise<string> => {
   //const body = JSON.stringify(data);
-  const body = Object.entries(data)
-    .map(([k, v]) => k + "=" + encodeURIComponent(v))
-    .join("&");
+  const body = paramsToQueryString(data);
   const options = {
     body,
     headers: { "content-type": "application/x-www-form-urlencoded" }, // "application/json" },
@@ -52,17 +55,17 @@ export const callback = async (url: string, data: Object): Promise<string> => {
   try {
     const r = await fetch(url, options);
 
+    if (!r.ok) {
+      const t = await r.text();
+      throw Error("request failed: " + t);
+    }
+
     if (r.headers.get("content-type")?.includes("application/json")) {
       const { access_token } = await r.json();
       return access_token;
     }
 
-    //console.log(await r.text());
     const response = await r.text();
-
-    // console.log(r.headers.get("content-type"));
-
-    // console.info(response);
 
     const a = response
       .split("&")
@@ -78,7 +81,7 @@ export const callback = async (url: string, data: Object): Promise<string> => {
     return a[1];
   } catch (err) {
     console.log(err);
-    throw Error(err);
+    throw err;
   }
 };
 
@@ -86,3 +89,10 @@ export const oAuthHeaders = (accessToken: string): FT.HeaderInit => ({
   "content-type": "application/json",
   Authorization: "Bearer " + accessToken,
 });
+
+/**
+ * @see https://stackoverflow.com/a/50089071/1659569
+ * @returns
+ */
+export const generateNonce = (): string =>
+  crypto.randomBytes(16).toString("base64");
