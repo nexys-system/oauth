@@ -4,7 +4,6 @@ cache.json
 logs
 *.log
 npm-debug.log*
-
 snapshot.zip
 
 .env
@@ -45,4 +44,7 @@ build/
 dist/
 
 build/*
+
+
+src/example.ts
 
