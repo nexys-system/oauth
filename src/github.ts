@@ -35,6 +35,12 @@ export default class Github extends AbstractOAuth<Profile> {
     };
   };
 
+  /**
+   *
+   * @param state
+   * @param scopes , see list of available scopes: https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps#available-scopes
+   * @returns
+   */
   oAuthUrl = (state?: string, scopes?: string[]): string => {
     const params = this.getParams(state, scopes);
     return Utils.oAuthLink(urlAuthorize, params);
