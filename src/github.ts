@@ -1,3 +1,4 @@
+// see https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
 import fetch from "node-fetch";
 import * as Utils from "./utils";
 import AbstractOAuth from "./abstract";
@@ -23,21 +24,19 @@ export default class Github extends AbstractOAuth<Profile> {
     return Utils.callback(urlToken, body);
   };
 
-  getParams = (state?: string) => {
-    const params = {
+  getParams = (state?: string, scopes?: string[]) => {
+    const scope: string | undefined = scopes ? scopes.join(" ") : undefined;
+
+    return {
       client_id: this.client_id,
       redirect_uri: this.redirect_uri,
+      state,
+      scope,
     };
-
-    if (state) {
-      return { state, ...params };
-    }
-
-    return params;
   };
 
-  oAuthUrl = (state?: string): string => {
-    const params = this.getParams(state);
+  oAuthUrl = (state?: string, scopes?: string[]): string => {
+    const params = this.getParams(state, scopes);
     return Utils.oAuthLink(urlAuthorize, params);
   };
 
