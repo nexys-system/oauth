@@ -54,6 +54,11 @@ export default class Google extends AbstractOAuth<Profile> {
   };
 
   callback = async (code: string): Promise<string> => {
+    const { access_token } = await this.callbackComplete(code);
+    return access_token;
+  }
+
+  callbackComplete = async (code: string): Promise<{access_token:string, refresh_token?:string}> => {
     const url = apiHost + "/oauth2/v4/token";
 
     const body = {
@@ -64,7 +69,7 @@ export default class Google extends AbstractOAuth<Profile> {
       grant_type: "authorization_code",
     };
 
-    return Utils.callback(url, body);
+    return Utils.callbackComplete(url, body);
   };
 
   getProfile = async (accessToken: string): Promise<Profile> => {
