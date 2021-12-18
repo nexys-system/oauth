@@ -56,9 +56,11 @@ export default class Google extends AbstractOAuth<Profile> {
   callback = async (code: string): Promise<string> => {
     const { access_token } = await this.callbackComplete(code);
     return access_token;
-  }
+  };
 
-  callbackComplete = async (code: string): Promise<{access_token:string, refresh_token?:string}> => {
+  callbackComplete = async (
+    code: string
+  ): Promise<{ access_token: string; refresh_token?: string }> => {
     const url = apiHost + "/oauth2/v4/token";
 
     const body = {
@@ -96,7 +98,13 @@ export default class Google extends AbstractOAuth<Profile> {
     }
   };
 
-  getRefreshedToken = async (refresh_token: string) => {
+  /**
+   * get refreshed token
+   * note: we reuse the callback function since the interface is the same, it should however be reworked to account for different out types
+   * @param refresh_token
+   * @returns new access token
+   */
+  getRefreshedToken = async (refresh_token: string): Promise<string> => {
     const url = apiHost + "/oauth2/v4/token";
 
     const body = {
@@ -108,4 +116,13 @@ export default class Google extends AbstractOAuth<Profile> {
 
     return Utils.callback(url, body);
   };
+}
+
+// expected out type when refreshing token
+// https://developers.google.com/identity/protocols/oauth2/web-server#httprest_7
+export interface RefreshOut {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: "Bearer";
 }

@@ -43,8 +43,10 @@ export const oAuthLink = (
   params: { [k: string]: string | boolean | number | undefined }
 ): string => host + "?" + paramsToQueryString(params);
 
-export const callbackComplete = async (url: string, data: Object): Promise<{access_token: string, refresh_token?:string}> => {
-  //const body = JSON.stringify(data);
+export const callbackComplete = async (
+  url: string,
+  data: Object
+): Promise<{ access_token: string; refresh_token?: string }> => {
   const body = paramsToQueryString(data);
   const options = {
     body,
@@ -65,8 +67,6 @@ export const callbackComplete = async (url: string, data: Object): Promise<{acce
     }
 
     const response = await r.text();
-    
-
 
     const a = response
       .split("&")
@@ -79,7 +79,7 @@ export const callbackComplete = async (url: string, data: Object): Promise<{acce
       throw Error("could not find access token");
     }
 
-    return {access_token: a[1]};
+    return { access_token: a[1] };
   } catch (err) {
     console.log(err);
     throw err;
@@ -89,8 +89,7 @@ export const callbackComplete = async (url: string, data: Object): Promise<{acce
 export const callback = async (url: string, data: Object): Promise<string> => {
   const { access_token } = await callbackComplete(url, data);
   return access_token;
-}
-
+};
 
 export const oAuthHeaders = (accessToken: string): FT.HeaderInit => ({
   "content-type": "application/json",
