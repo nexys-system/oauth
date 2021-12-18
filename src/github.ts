@@ -1,4 +1,5 @@
 // see https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
+// manage credentials https://console.cloud.google.com/apis/credentials
 import fetch from "node-fetch";
 import * as Utils from "./utils";
 import AbstractOAuth from "./abstract";
