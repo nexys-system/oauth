@@ -1,5 +1,4 @@
 // this is WIP, does not work yet
-import fetch from "node-fetch";
 import * as Utils from "./utils";
 import AbstractOAuth from "./abstract";
 
