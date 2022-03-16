@@ -14,22 +14,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nexysweb/boilerplate-node-package"
+    "url": "https://github.com/nexys-web/oauth"
   },
   "keywords": [],
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "@types/jsonwebtoken": "^8.5.6",
-    "@types/node-fetch": "^2.5.12",
     "jest": "^26.0.1",
     "jsonwebtoken": "^8.5.1",
     "nock": "^13.1.1",
-    "node-fetch": "^2.6.1",
     "ts-jest": "^25.3.1",
     "typescript": "^3.9.3"
-  },
-  "peerDependencies": {
-    "@types/node-fetch": "^2.5.12",
-    "node-fetch": "^2.6.1"
   }
 }

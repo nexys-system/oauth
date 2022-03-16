@@ -1,5 +1,4 @@
 import * as T from "./type";
-import fetch from "node-fetch";
 import JWT from "jsonwebtoken";
 
 export const defaultValues = {
