@@ -38,8 +38,10 @@ export const scopesDefault: string[] = [
 export default class Google extends AbstractOAuth<Profile> {
   oAuthUrl = (
     state: string = stateDefault,
-    scopes: string[] = scopesDefault
+    scopes: string[] = scopesDefault, 
   ) => {
+    // see doc
+    // https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient
     const params = {
       scope: scopes.join(" "),
       state,
@@ -48,7 +50,7 @@ export default class Google extends AbstractOAuth<Profile> {
       client_id: this.client_id,
       prompt: "consent",
       access_type: "offline", // this allows us to get the refresh token
-      include_granted_scopes: true,
+      //   include_granted_scopes: true,
     };
     return Utils.oAuthLink(urlAuthorize, params);
   };
