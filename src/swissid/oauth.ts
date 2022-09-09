@@ -19,17 +19,15 @@ export default class SwissId extends AbstractOAuth<T.Profile> {
   }
 
   callback = async (code: string): Promise<string> => {
-    const body = {
-      grant_type: "authorization_code",
+    const r = await UU.callback(
       code,
-      client_id: this.client_id,
-      client_secret: this.client_secret,
-      redirect_uri: this.redirect_uri,
-    };
+      this.host,
+      this.redirect_uri,
+      this.client_id,
+      this.client_secret
+    );
 
-    const url = this.host + "/access_token";
-
-    return Utils.callback(url, body);
+    return r.access_token;
   };
 
   getParams = (paramsInput: Partial<T.InputParams> = {}) => ({

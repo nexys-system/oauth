@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "@types/jsonwebtoken": "^8.5.6",
+    "@types/node": "^18.7.16",
     "@types/node-fetch": "^2.5.12",
     "jest": "^26.0.1",
     "jsonwebtoken": "^8.5.1",
