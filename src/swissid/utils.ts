@@ -1,10 +1,9 @@
 import * as T from "./type";
-import fetch from "node-fetch";
 import JWT from "jsonwebtoken";
 
 export const defaultValues = {
   locales: "de",
-  scope: "openid profile",
+  scope: "openid profile email",
   host: "https://login.sandbox.pre.swissid.ch/idp/oauth2",
 };
 

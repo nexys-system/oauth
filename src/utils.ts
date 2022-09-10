@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-import * as FT from "node-fetch";
 import crypto from "crypto";
 
 export interface OAuthHeaders {
@@ -91,7 +89,7 @@ export const callback = async (url: string, data: Object): Promise<string> => {
   return access_token;
 };
 
-export const oAuthHeaders = (accessToken: string): FT.HeaderInit => ({
+export const oAuthHeaders = (accessToken: string) => ({
   "content-type": "application/json",
   Authorization: "Bearer " + accessToken,
 });

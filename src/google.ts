@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-import * as FT from "node-fetch";
 import * as Utils from "./utils";
 import AbstractOAuth from "./abstract";
 
@@ -38,7 +36,7 @@ export const scopesDefault: string[] = [
 export default class Google extends AbstractOAuth<Profile> {
   oAuthUrl = (
     state: string = stateDefault,
-    scopes: string[] = scopesDefault, 
+    scopes: string[] = scopesDefault
   ) => {
     // see doc
     // https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient
@@ -80,7 +78,7 @@ export default class Google extends AbstractOAuth<Profile> {
     const url: string =
       "https://www.googleapis.com/oauth2/v1/userinfo?alt=json";
 
-    const options: FT.RequestInit = {
+    const options = {
       headers: Utils.oAuthHeaders(accessToken),
       method: "GET",
     };
