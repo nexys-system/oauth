@@ -15,6 +15,7 @@ export interface JWTContent {
   gender: string;
   sub: string;
   updated_at: number;
+  email?: string  // this is optional since the email must explicitly be added to the scope
 }
 
 export interface InputParams {
