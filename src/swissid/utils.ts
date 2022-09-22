@@ -77,9 +77,10 @@ export const getProfile = async (
     sub: id,
     given_name: firstName,
     family_name: lastName,
+    email,
     gender,
     language: locale,
   } = JWT.decode(t) as T.JWTContent;
 
-  return { id, firstName, lastName, locale, gender };
+  return { id, firstName, lastName, locale, gender, email };
 };
