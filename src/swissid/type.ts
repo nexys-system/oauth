@@ -4,6 +4,7 @@ export interface Profile {
   lastName: string;
   gender: string;
   locale: string;
+  email?: string; // this is optional since the email must explicitly be added to the scope
 }
 
 // this is the shape of the JWT returned by the userinfo endpoint
