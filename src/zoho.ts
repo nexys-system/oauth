@@ -13,6 +13,14 @@ const host = "https://accounts.zoho.com/oauth/v2";
 const urlAuthorize: string = host + "/auth";
 const urlToken: string = host + "/token";
 
+interface ParamsOptions {
+  state: string;
+  scopes: string[];
+  access_type: "online" | "offline";
+  prompt: "consent";
+  response_type: "code";
+}
+
 //scopes: https://www.zoho.com/crm/developer/docs/api/v2/scopes.html
 
 /**
@@ -34,10 +42,14 @@ export default class Github extends AbstractOAuth<Profile> {
   /**
    * https://www.zoho.com/accounts/protocol/oauth/web-apps/authorization.html
    */
-  getParams = (state?: string, scopes: string[] = ['AaaServer.profile.Read'], access_type: 'online' | 'offline' = 'offline') => {
-    const response_type = "code";
-    const prompt = "consent";
-    const scope = scopes.join(',');
+  getParams = ({
+    state,
+    scopes = ["AaaServer.profile.Read"],
+    access_type = "offline",
+    prompt = "consent",
+    response_type = "code",
+  }: Partial<ParamsOptions>) => {
+    const scope = scopes.join(",");
 
     const params = {
       scope,
@@ -55,8 +67,8 @@ export default class Github extends AbstractOAuth<Profile> {
     return params;
   };
 
-  oAuthUrl = (state?: string): string => {
-    const params = this.getParams(state);
+  oAuthUrl = (state?: string, scopes?: string[]): string => {
+    const params = this.getParams({ state, scopes });
     return Utils.oAuthLink(urlAuthorize, params);
   };
 
