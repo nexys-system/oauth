@@ -27,7 +27,7 @@ test("redirect url", () => {
   const url = z.oAuthUrl();
 
   expect(url).toEqual(
-    "https://accounts.zoho.com/oauth/v2/auth?response_type=code&scope=AaaServer.profile.Read&prompt=consent&client_id=clientId&redirect_uri=https%3A%2F%2Fmyhost%2Fsso%2Fzoho%2Fredirect"
+    "https://accounts.zoho.com/oauth/v2/auth?scope=AaaServer.profile.Read&response_type=code&prompt=consent&access_type=offline&client_id=clientId&redirect_uri=https%3A%2F%2Fmyhost%2Fsso%2Fzoho%2Fredirect""
   );
 });
 
