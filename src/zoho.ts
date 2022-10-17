@@ -12,8 +12,8 @@ export interface Profile {
 const host = "https://accounts.zoho.com/oauth/v2";
 const urlAuthorize: string = host + "/auth";
 const urlToken: string = host + "/token";
-// https://www.zoho.com/crm/developer/docs/api/v2/scopes.html
-const scope = "AaaServer.profile.Read";
+
+//scopes: https://www.zoho.com/crm/developer/docs/api/v2/scopes.html
 
 /**
  * https://www.zoho.com/accounts/protocol/oauth/web-apps/access-token.html
@@ -34,7 +34,8 @@ export default class Github extends AbstractOAuth<Profile> {
   /**
    * https://www.zoho.com/accounts/protocol/oauth/web-apps/authorization.html
    */
-  getParams = (state?: string) => {
+  getParams = (state?: string, scopes: string[] = ['AaaServer.profile.Read']) => {
+    const scope = scopes.join(',');
     const params = {
       response_type: "code",
       scope,
