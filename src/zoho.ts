@@ -34,12 +34,16 @@ export default class Github extends AbstractOAuth<Profile> {
   /**
    * https://www.zoho.com/accounts/protocol/oauth/web-apps/authorization.html
    */
-  getParams = (state?: string, scopes: string[] = ['AaaServer.profile.Read']) => {
+  getParams = (state?: string, scopes: string[] = ['AaaServer.profile.Read'], access_type: 'online' | 'offline' = 'offline') => {
+    const response_type = "code";
+    const prompt = "consent";
     const scope = scopes.join(',');
+
     const params = {
-      response_type: "code",
       scope,
-      prompt: "consent",
+      response_type,
+      prompt,
+      access_type,
       client_id: this.client_id,
       redirect_uri: this.redirect_uri,
     };
