@@ -7,7 +7,8 @@ import Google from "./google";
 import Gitlab from "./gitlab";
 import Github from "./github";
 import SwissId from './swissid';
+import Microsoft from './microsoft';
 import Zoho from "./zoho";
 import * as Utils from "./utils";
 
-export { Abstract, Google, Github, Gitlab, SwissId, Zoho, Utils };
+export { Abstract, Google, Github, Gitlab, SwissId, Microsoft, Zoho, Utils };
