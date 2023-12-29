@@ -1,6 +1,6 @@
 {
   "name": "@nexys/oauth",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "main": "dist/index.js",
   "files": [
     "dist/*",
@@ -14,15 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nexysweb/boilerplate-node-package"
+    "url": "https://github.com/nexys-system/oauth"
   },
   "keywords": [],
   "devDependencies": {
     "@types/jest": "^29.0.0",
-    "@types/jsonwebtoken": "^8.5.6",
     "@types/node": "^18.7.16",
     "jest": "^29.0.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "nock": "^13.2.9",
     "ts-jest": "^29.0.0",
     "typescript": "^4.8.3"
