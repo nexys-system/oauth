@@ -3,7 +3,9 @@ import nock from "nock";
 
 const redirect_uri = "https://myhost/sso/zoho/redirect";
 
-const z = new Z("clientId", "clientSecret", redirect_uri);
+const z = new Z("clientId", "clientSecret", redirect_uri, [
+  "AaaServer.profile.Read",
+]);
 
 const accessToken = "myaccesstoken";
 nock("https://accounts.zoho.com/oauth/v2").post("/token").reply(200, {
