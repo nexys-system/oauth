@@ -8,7 +8,7 @@ import Gitlab from "./gitlab.js";
 import Github from "./github.js";
 import SwissId from "./swissid/index.js";
 import Microsoft from "./microsoft/index.js";
-import Zoho from "./zoho.js";
+import Zoho from "./zoho/index.js";
 import * as Utils from "./utils.js";
 
 export { Abstract, Google, Github, Gitlab, SwissId, Microsoft, Zoho, Utils };

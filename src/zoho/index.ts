@@ -1,5 +1,6 @@
-import * as Utils from "./utils.js";
-import AbstractOAuth from "./abstract.js";
+import * as Utils from "../utils.js";
+import AbstractOAuth from "../abstract.js";
+import { ParamsToken, ResponseToken } from "../type.js";
 
 export interface Profile {
   First_Name: string;
@@ -26,7 +27,7 @@ interface ParamsOptions {
 /**
  * https://www.zoho.com/accounts/protocol/oauth/web-apps/access-token.html
  */
-class Github extends AbstractOAuth<Profile> {
+class Zoho extends AbstractOAuth<Profile> {
   callback = async (code: string): Promise<string> => {
     const body = {
       client_id: this.client_id,
@@ -44,7 +45,7 @@ class Github extends AbstractOAuth<Profile> {
    */
   getParams = ({
     state,
-    scopes = ["AaaServer.profile.Read"],
+    scopes = this.scopes, // ["AaaServer.profile.Read"],
     access_type = "offline",
     prompt = "consent",
     response_type = "code",
@@ -91,8 +92,39 @@ class Github extends AbstractOAuth<Profile> {
 
     return j;
   };
+
+  getToken = async (paramsExtra: ParamsToken): Promise<ResponseToken> => {
+    const params = {
+      client_id: this.client_id,
+      client_secret: this.client_secret,
+      redirect_uri: this.redirect_uri,
+      scope: this.scopes.join(","),
+      ...paramsExtra,
+    };
+
+    const url = `${host}/oauth/v2/token`;
+
+    const { access_token, refresh_token = "" } = await Utils.callbackComplete(
+      url,
+      params
+    );
+
+    return { access_token, refresh_token };
+  };
+
+  getAccessToken = async (code: string): Promise<ResponseToken> =>
+    this.getToken({
+      grant_type: "authorization_code",
+      code,
+    });
+
+  refreshAccessToken = async (refresh_token: string) =>
+    this.getToken({
+      grant_type: "refresh_token",
+      refresh_token,
+    });
 }
 
-export { Github };
+export { Zoho };
 
-export default Github;
+export default Zoho;
