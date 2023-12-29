@@ -1,6 +1,6 @@
 import nock from "nock";
 
-import { defaultValues } from "./utils";
+import { defaultValues } from "./utils.js";
 
 const accessToken = "myaccesstoken";
 nock("https://accounts.zoho.com/oauth/v2").post("/token").reply(200, {

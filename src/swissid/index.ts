@@ -1,4 +1,4 @@
-export * as T from "./type";
-import OAuth from "./oauth";
+export * as T from "./type.js";
+import OAuth from "./oauth.js";
 
 export default OAuth;

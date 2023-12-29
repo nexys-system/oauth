@@ -1,6 +1,6 @@
-import * as Utils from "../utils";
-import AbstractOAuth from "../abstract";
-import { UserInfo } from "./type";
+import * as Utils from "../utils.js";
+import AbstractOAuth from "../abstract.js";
+import { UserInfo } from "./type.js";
 
 // https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
 // to get credentials

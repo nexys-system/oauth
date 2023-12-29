@@ -1,5 +1,5 @@
-import * as Utils from "./utils";
-import AbstractOAuth from "./abstract";
+import * as Utils from "./utils.js";
+import AbstractOAuth from "./abstract.js";
 
 export type Profile = { id: string; login: string };
 

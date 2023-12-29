@@ -1,4 +1,8 @@
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+export default {
+  extensionsToTreatAsEsm: ['.ts'],
+  preset: "ts-jest",
+  testEnvironment: "node",
+  "moduleNameMapper": {
+    "^(\\.\\.?\\/.+)\\.js?$": "$1"
+}
 };

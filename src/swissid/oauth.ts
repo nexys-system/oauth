@@ -1,8 +1,8 @@
-import * as Utils from "../utils";
-import AbstractOAuth from "../abstract";
+import * as Utils from "../utils.js";
+import AbstractOAuth from "../abstract.js";
 
-import * as UU from "./utils";
-import * as T from "./type";
+import * as UU from "./utils.js";
+import * as T from "./type.js";
 
 export default class SwissId extends AbstractOAuth<T.Profile> {
   host: string;

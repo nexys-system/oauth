@@ -1,5 +1,5 @@
-import * as Utils from "./utils";
-import AbstractOAuth from "./abstract";
+import * as Utils from "./utils.js";
+import AbstractOAuth from "./abstract.js";
 
 export interface Profile {
   First_Name: string;
@@ -26,7 +26,7 @@ interface ParamsOptions {
 /**
  * https://www.zoho.com/accounts/protocol/oauth/web-apps/access-token.html
  */
-export default class Github extends AbstractOAuth<Profile> {
+class Github extends AbstractOAuth<Profile> {
   callback = async (code: string): Promise<string> => {
     const body = {
       client_id: this.client_id,
@@ -92,3 +92,7 @@ export default class Github extends AbstractOAuth<Profile> {
     return j;
   };
 }
+
+export { Github };
+
+export default Github;

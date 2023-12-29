@@ -1,4 +1,4 @@
-import Z, { Profile } from "./zoho";
+import Z, { Profile } from "./zoho.js";
 import nock from "nock";
 
 const redirect_uri = "https://myhost/sso/zoho/redirect";

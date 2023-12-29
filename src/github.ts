@@ -1,7 +1,7 @@
 // see https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
 // manage credentials https://console.cloud.google.com/apis/credentials
-import * as Utils from "./utils";
-import AbstractOAuth from "./abstract";
+import * as Utils from "./utils.js";
+import AbstractOAuth from "./abstract.js";
 
 export interface Profile {
   id: number;

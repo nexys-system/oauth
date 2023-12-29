@@ -1,4 +1,4 @@
-import { UserInfo } from "./type";
+import { UserInfo } from "./type.js";
 
 export const urlPrefix = "https://login.microsoftonline.com/common/oauth2/v2.0";
 

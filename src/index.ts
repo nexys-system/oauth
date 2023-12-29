@@ -1,14 +1,14 @@
-export * as GoogleUtil from "./google";
-export * as GitlabUtil from "./gitlab";
-export * as GithubUtil from "./github";
+export * as GoogleUtil from "./google.js";
+export * as GitlabUtil from "./gitlab.js";
+export * as GithubUtil from "./github.js";
 
-import Abstract from "./abstract";
-import Google from "./google";
-import Gitlab from "./gitlab";
-import Github from "./github";
-import SwissId from './swissid';
-import Microsoft from './microsoft';
-import Zoho from "./zoho";
-import * as Utils from "./utils";
+import Abstract from "./abstract.js";
+import Google from "./google.js";
+import Gitlab from "./gitlab.js";
+import Github from "./github.js";
+import SwissId from "./swissid/index.js";
+import Microsoft from "./microsoft/index.js";
+import Zoho from "./zoho.js";
+import * as Utils from "./utils.js";
 
 export { Abstract, Google, Github, Gitlab, SwissId, Microsoft, Zoho, Utils };

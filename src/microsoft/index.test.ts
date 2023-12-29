@@ -1,5 +1,5 @@
 // https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
-import M from "./index";
+import M from "./index.js";
 
 const clientId = "myclientId";
 const clientSecret = "clientSecret";
