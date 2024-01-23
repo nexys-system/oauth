@@ -102,7 +102,7 @@ class Zoho extends AbstractOAuth<Profile> {
       ...paramsExtra,
     };
 
-    const url = `${host}/oauth/v2/token`;
+    const url = `${host}/token`;
 
     const { access_token, refresh_token = "" } = await Utils.callbackComplete(
       url,
