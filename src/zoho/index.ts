@@ -10,7 +10,7 @@ export interface Profile {
   ZUID: number;
 }
 
-const host = "https://accounts.zoho.com/oauth/v2";
+const host: string = "https://accounts.zoho.eu/oauth/v2";
 const urlAuthorize: string = host + "/auth";
 const urlToken: string = host + "/token";
 
@@ -88,9 +88,7 @@ class Zoho extends AbstractOAuth<Profile> {
     };
 
     const r = await fetch(url, options);
-    const j = await r.json();
-
-    return j;
+    return r.json();
   };
 
   getToken = async (paramsExtra: ParamsToken): Promise<ResponseToken> => {
