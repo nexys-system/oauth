@@ -1,6 +1,6 @@
 import * as Utils from "../utils.js";
 import AbstractOAuth from "../abstract.js";
-import { ParamsToken, ResponseToken } from "../type.js";
+import { ParamsToken, ResponseToken, ParamsOptions } from "../type.js";
 
 export interface Profile {
   First_Name: string;
@@ -11,18 +11,10 @@ export interface Profile {
 }
 
 const host: string = "https://accounts.zoho.eu/oauth/v2";
-const urlAuthorize: string = host + "/auth";
-const urlToken: string = host + "/token";
 
-interface ParamsOptions {
-  state: string;
-  scopes: string[];
-  access_type: "online" | "offline";
-  prompt: "consent";
-  response_type: "code";
-}
-
-//scopes: https://www.zoho.com/crm/developer/docs/api/v2/scopes.html
+// https://www.zoho.com/mail/help/api/using-oauth-2.html
+// token validity: https://www.zoho.com/crm/developer/docs/api/v6/token-validity.html
+// scopes: https://www.zoho.com/crm/developer/docs/api/v2/scopes.html
 
 /**
  * https://www.zoho.com/accounts/protocol/oauth/web-apps/access-token.html
@@ -37,7 +29,7 @@ class Zoho extends AbstractOAuth<Profile> {
       code,
     };
 
-    return Utils.callback(urlToken, body);
+    return Utils.callback(host + "/token", body);
   };
 
   /**
@@ -52,7 +44,7 @@ class Zoho extends AbstractOAuth<Profile> {
   }: Partial<ParamsOptions>) => {
     const scope = scopes.join(",");
 
-    const params = {
+    const params:ParamsOptions = {
       scope,
       response_type,
       prompt,
@@ -70,7 +62,7 @@ class Zoho extends AbstractOAuth<Profile> {
 
   oAuthUrl = (state?: string, scopes?: string[]): string => {
     const params = this.getParams({ state, scopes });
-    return Utils.oAuthLink(urlAuthorize, params);
+    return Utils.oAuthLink(host + "/auth", params);
   };
 
   /**
