@@ -8,9 +8,9 @@ const host = "https://api.instagram.com";
 class Instagram extends AbstractOAuth<Profile> {
   oAuthUrl = (
     state?: string | undefined,
-    scopes?: string[] | undefined
+    scopes: string[] = this.scopes
   ): string => {
-    const scope = (scopes || []).join(",");
+    const scope = scopes.join(",");
     const response_type = "code";
     const params = {
       client_id: this.client_id,
