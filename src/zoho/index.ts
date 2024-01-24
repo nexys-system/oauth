@@ -22,11 +22,11 @@ const host: string = "https://accounts.zoho.eu/oauth/v2";
 class Zoho extends AbstractOAuth<Profile> {
   callback = async (code: string): Promise<string> => {
     const body = {
-      client_id: this.client_id,
+      code,
       grant_type: "authorization_code",
+      client_id: this.client_id,
       client_secret: this.client_secret,
       redirect_uri: this.redirect_uri,
-      code,
     };
 
     return Utils.callback(host + "/token", body);
@@ -37,27 +37,24 @@ class Zoho extends AbstractOAuth<Profile> {
    */
   getParams = ({
     state,
-    scopes = this.scopes, // ["AaaServer.profile.Read"],
+    scopes = this.scopes,
     access_type = "offline",
     prompt = "consent",
     response_type = "code",
   }: Partial<ParamsOptions>) => {
     const scope = scopes.join(",");
+    const client_id = this.client_id;
+    const redirect_uri = this.redirect_uri;
 
-    const params:ParamsOptions = {
+    return {
+      state,
       scope,
       response_type,
       prompt,
       access_type,
-      client_id: this.client_id,
-      redirect_uri: this.redirect_uri,
+      client_id,
+      redirect_uri,
     };
-
-    if (state) {
-      return { state, ...params };
-    }
-
-    return params;
   };
 
   oAuthUrl = (state?: string, scopes?: string[]): string => {
