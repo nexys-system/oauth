@@ -5,7 +5,7 @@ export interface OAuthHeaders {
 }
 const isUndefined = (a: any): a is undefined => a === undefined;
 
-const paramsToQueryString = (
+export const paramsToQueryString = (
   params:
     | Object
     | {
