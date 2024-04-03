@@ -11,7 +11,10 @@ interface AppleProfile {
 
 const urlPrefix = "https://appleid.apple.com/auth";
 
-class AppleSSOClient extends AbstractOAuth<AppleProfile> {
+class AppleSSOClient extends AbstractOAuth<
+  AppleProfile,
+  { access_token: string; id_token: string }
+> {
   constructor(
     clientId: string,
     teamId: string,
@@ -45,7 +48,9 @@ class AppleSSOClient extends AbstractOAuth<AppleProfile> {
     return urlPrefix + "/authorize?" + paramsToQueryString(params);
   };
 
-  callback = async (code: string): Promise<string> => {
+  callback = async (
+    code: string
+  ): Promise<{ access_token: string; id_token: string }> => {
     const formData = {
       client_id: this.client_id,
       client_secret: this.client_secret,
@@ -66,7 +71,7 @@ class AppleSSOClient extends AbstractOAuth<AppleProfile> {
 
     if (response.ok) {
       const r = await response.json();
-      return r.access_token;
+      return r;
       // const accessToken = data.access_token;
       // console.log("Access Token:", accessToken);
       // Use the access token to call Apple's APIs for user information

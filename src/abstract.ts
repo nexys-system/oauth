@@ -1,4 +1,4 @@
-export default abstract class OAuth2<Profile> {
+export default abstract class OAuth2<Profile, CallbackResponse = string> {
   client_id: string;
   client_secret: string;
   redirect_uri: string;
@@ -16,7 +16,7 @@ export default abstract class OAuth2<Profile> {
     this.scopes = scopes;
   }
 
-  abstract callback(code: string): Promise<string>;
+  abstract callback(code: string): Promise<CallbackResponse>;
 
   abstract oAuthUrl(state?: string, scopes?: string[]): string;
 
