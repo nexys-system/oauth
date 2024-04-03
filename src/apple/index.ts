@@ -29,7 +29,10 @@ class AppleSSOClient extends AbstractOAuth<AppleProfile> {
     super(clientId, client_secret, redirectUrl);
   }
 
-  oAuthUrl = (state = undefined, scopes = ["name", "email"]) => {
+  oAuthUrl = (
+    state: string | undefined = undefined,
+    scopes = ["name", "email"]
+  ) => {
     const params = {
       response_type: "code",
       response_mode: "form_post",
@@ -42,7 +45,7 @@ class AppleSSOClient extends AbstractOAuth<AppleProfile> {
     return urlPrefix + "/authorize?" + paramsToQueryString(params);
   };
 
-  callback = async (code: string) => {
+  callback = async (code: string): Promise<string> => {
     const formData = {
       client_id: this.client_id,
       client_secret: this.client_secret,
@@ -62,7 +65,8 @@ class AppleSSOClient extends AbstractOAuth<AppleProfile> {
     });
 
     if (response.ok) {
-      return response.json();
+      const r = await response.json();
+      return r.access_token;
       // const accessToken = data.access_token;
       // console.log("Access Token:", accessToken);
       // Use the access token to call Apple's APIs for user information
@@ -73,10 +77,10 @@ class AppleSSOClient extends AbstractOAuth<AppleProfile> {
   };
 
   getProfile = async (token: string) => {
-    const url = urlPrefix + "/userInfo";
+    const url = "https://appleid.apple.com/openid/userinfo"; // urlPrefix + "/userInfo";
 
     const response = await fetch(url, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${token}`,
